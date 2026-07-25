@@ -1,15 +1,14 @@
 import feedparser
 
+from config import RSS_URL, NEWS_LIMIT
 
-RSS_URL = "https://rss.dw.com/xml/rss-de-all"
 
-
-def get_news(limit=5):
+def get_news():
     feed = feedparser.parse(RSS_URL)
 
     articles = []
 
-    for entry in feed.entries[:limit]:
+    for entry in feed.entries[:NEWS_LIMIT]:
         articles.append(
             {
                 "title": entry.title,
