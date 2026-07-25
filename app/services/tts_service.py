@@ -1,6 +1,7 @@
 import edge_tts
 from services.audio_merger import merge_audio_files
 
+
 async def generate_audio(text, voice, output_file):
     communicate = edge_tts.Communicate(
         text=text,
@@ -15,11 +16,20 @@ async def generate_briefing_audio(
     summary_pl,
     vocabulary
 ):
+    # =========================
+    # German summary
+    # =========================
+
     await generate_audio(
         summary_de,
         "de-DE-KatjaNeural",
         "data/audio/summary_de.mp3"
     )
+
+
+    # =========================
+    # Polish summary
+    # =========================
 
     await generate_audio(
         summary_pl,
@@ -27,28 +37,58 @@ async def generate_briefing_audio(
         "data/audio/summary_pl.mp3"
     )
 
-    vocab_text = ""
+
+    # =========================
+    # Vocabulary split by language
+    # =========================
+
+    vocab_de = ""
+    vocab_pl = ""
 
     for item in vocabulary:
-        vocab_text += (
+        vocab_de += (
             f"{item['word']}. "
-            f"{item['translation']}. "
             f"{item['example_de']}. "
+        )
+
+        vocab_pl += (
+            f"{item['translation']}. "
             f"{item['example_pl']}. "
         )
 
+
+    # =========================
+    # German vocabulary
+    # =========================
+
     await generate_audio(
-        vocab_text,
+        vocab_de,
         "de-DE-KatjaNeural",
-        "data/audio/vocabulary.mp3"
+        "data/audio/vocabulary_de.mp3"
     )
+
+
+    # =========================
+    # Polish vocabulary
+    # =========================
+
+    await generate_audio(
+        vocab_pl,
+        "pl-PL-MarekNeural",
+        "data/audio/vocabulary_pl.mp3"
+    )
+
+
+    # =========================
+    # Merge final briefing
+    # =========================
 
     merge_audio_files(
         [
             "data/audio/summary_de.mp3",
             "data/audio/summary_pl.mp3",
-            "data/audio/vocabulary.mp3",
+            "data/audio/vocabulary_de.mp3",
+            "data/audio/vocabulary_pl.mp3",
         ],
         "data/audio/daily_briefing.mp3"
     )
-    

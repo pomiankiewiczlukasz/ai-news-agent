@@ -9,6 +9,7 @@ from agents.vocabulary_reviewer import review_vocabulary
 from services.rss_reader import get_news
 from services.briefing_writer import save_briefing
 from services.tts_service import generate_briefing_audio
+from agents.polish_cleaner import clean_polish_text
 
 
 def main():
@@ -34,7 +35,11 @@ def main():
 
 
     # 4. Polish translation
-    summary_pl = translate_summary(summary_de)
+    summary_pl_raw = translate_summary(summary_de)
+
+    summary_pl = clean_polish_text(
+    summary_pl_raw
+    )
 
     print("Polish Translation:")
     print("TEXT FOR POLISH AUDIO:")
