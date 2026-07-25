@@ -24,3 +24,16 @@
 2026-07-25 23:39:11,369 - INFO - Vocabulary generated
 2026-07-25 23:39:31,594 - INFO - Audio generated
 2026-07-25 23:39:31,595 - INFO - Briefing saved
+2026-07-26 00:06:51,010 - INFO - AI News Agent started
+2026-07-26 00:06:51,212 - INFO - Articles fetched: 5
+2026-07-26 00:06:51,212 - INFO - Selected article: Sudan: Wenn die Drohne ins Klassenzimmer einschlägt
+2026-07-26 00:07:52,101 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-07-26 00:07:52,105 - INFO - German summary generated
+2026-07-26 00:09:02,556 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-07-26 00:10:25,051 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-07-26 00:10:25,052 - INFO - Polish translation generated
+2026-07-26 00:12:27,783 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-07-26 00:14:33,634 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-07-26 00:14:33,635 - INFO - Vocabulary generated
+2026-07-26 00:15:05,665 - INFO - Audio generated
+2026-07-26 00:15:05,667 - INFO - Briefing saved

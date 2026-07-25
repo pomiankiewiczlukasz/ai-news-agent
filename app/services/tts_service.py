@@ -1,4 +1,6 @@
 import edge_tts
+
+from config import GERMAN_VOICE, POLISH_VOICE
 from services.audio_merger import merge_audio_files
 
 
@@ -22,7 +24,7 @@ async def generate_briefing_audio(
 
     await generate_audio(
         summary_de,
-        "de-DE-KatjaNeural",
+        GERMAN_VOICE,
         "data/audio/summary_de.mp3"
     )
 
@@ -33,7 +35,7 @@ async def generate_briefing_audio(
 
     await generate_audio(
         summary_pl,
-        "pl-PL-MarekNeural",
+        POLISH_VOICE,
         "data/audio/summary_pl.mp3"
     )
 
@@ -63,7 +65,7 @@ async def generate_briefing_audio(
 
     await generate_audio(
         vocab_de,
-        "de-DE-KatjaNeural",
+        GERMAN_VOICE,
         "data/audio/vocabulary_de.mp3"
     )
 
@@ -74,7 +76,7 @@ async def generate_briefing_audio(
 
     await generate_audio(
         vocab_pl,
-        "pl-PL-MarekNeural",
+        POLISH_VOICE,
         "data/audio/vocabulary_pl.mp3"
     )
 
