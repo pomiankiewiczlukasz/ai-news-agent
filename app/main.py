@@ -5,6 +5,7 @@ from agents.news_ranker import rank_news
 from agents.summary_agent import summarize_article
 from agents.translation_agent import translate_summary
 from agents.vocabulary_agent import extract_vocabulary
+from agents.vocabulary_reviewer import review_vocabulary
 
 
 def main():
@@ -34,7 +35,10 @@ def main():
     print()
 
     # 5. Ekstrakcja słownictwa
-    vocabulary = extract_vocabulary(summary_de)
+    vocabulary_raw = extract_vocabulary(summary_de)
+
+    # 6. Korekta jakości słownictwa
+    vocabulary = review_vocabulary(vocabulary_raw)
 
     print("Vocabulary:")
     print(vocabulary)
