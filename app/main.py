@@ -81,6 +81,42 @@ def main():
 
     print("Briefing saved!")
 
+    # 9. Send email (optional)
+
+if os.getenv("GMAIL_USER") and os.getenv("GMAIL_PASSWORD"):
+
+    send_email(
+        subject=f"AI News Agent: {best_article['title']}",
+        body=f"""
+German News Briefing
+
+Article:
+{best_article['title']}
+
+Link:
+{best_article['link']}
+
+German Summary:
+
+{summary_de}
+
+
+Polish Translation:
+
+{summary_pl}
+
+
+Vocabulary:
+
+{vocabulary}
+""",
+        attachment_path="data/audio/daily_briefing.mp3"
+    )
+
+    print("Email sent!")
+
+else:
+    print("Email skipped - no Gmail configuration.")
 
 if __name__ == "__main__":
     main()
