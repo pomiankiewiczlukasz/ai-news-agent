@@ -1,5 +1,5 @@
 import asyncio
-import os
+import logging
 
 from agents.news_ranker import rank_news
 from agents.summary_agent import summarize_article
@@ -12,15 +12,31 @@ from services.rss_reader import get_news
 from services.briefing_writer import save_briefing
 from services.tts_service import generate_briefing_audio
 from services.email_service import send_email
+from services.logger import setup_logger
 
 
 def main():
 
+    logger = setup_logger()
+
+    logger.info(
+        "AI News Agent started"
+    )
+
     # 1. Get news from RSS
     articles = get_news()
 
+    logger.info(
+        f"Articles fetched: {len(articles)}"
+    )
+
+
     # 2. Select best article
     best_article = rank_news(articles)
+
+    logger.info(
+        f"Selected article: {best_article['title']}"
+    )
 
     print("Selected article:")
     print(best_article["title"])
@@ -30,6 +46,10 @@ def main():
 
     # 3. German summary
     summary_de = summarize_article(best_article)
+
+    logger.info(
+        "German summary generated"
+    )
 
     print("German Summary:")
     print(summary_de)
@@ -43,23 +63,32 @@ def main():
         summary_pl_raw
     )
 
+    logger.info(
+        "Polish translation generated"
+    )
+
     print("Polish Translation:")
     print(summary_pl)
     print()
 
 
-    # 5. Vocabulary extraction
+    # 5. Vocabulary
     vocabulary_raw = extract_vocabulary(summary_de)
 
-    # 6. Vocabulary review
-    vocabulary = review_vocabulary(vocabulary_raw)
+    vocabulary = review_vocabulary(
+        vocabulary_raw
+    )
+
+    logger.info(
+        "Vocabulary generated"
+    )
 
     print("Vocabulary:")
     print(vocabulary)
     print()
 
 
-    # 7. Generate audio
+    # 6. Generate audio
     asyncio.run(
         generate_briefing_audio(
             summary_de,
@@ -68,11 +97,15 @@ def main():
         )
     )
 
+    logger.info(
+        "Audio generated"
+    )
+
     print("Audio generated!")
     print()
 
 
-    # 8. Save markdown briefing
+    # 7. Save briefing
     save_briefing(
         best_article,
         summary_de,
@@ -80,33 +113,26 @@ def main():
         vocabulary
     )
 
-    print("Briefing saved!")
+    logger.info(
+        "Briefing saved"
+    )
+
+
+    # 8. Send email
+    send_email(
+    subject="AI News Agent Daily Briefing",
+    article_title=best_article["title"],
+    article_link=best_article["link"],
+    summary_de=summary_de,
+    summary_pl=summary_pl,
+    vocabulary=vocabulary,
+    attachment_path="data/audio/daily_briefing.mp3"
+)
+
+    print("Email sent!")
     print()
-
-
-    # 9. Send email if configured
-    if (
-        os.getenv("GMAIL_USER")
-        and os.getenv("GMAIL_PASSWORD")
-    ):
-
-        send_email(
-            subject=f"🇩🇪 AI News: {best_article['title']}",
-            article_title=best_article["title"],
-            article_link=best_article["link"],
-            summary_de=summary_de,
-            summary_pl=summary_pl,
-            vocabulary=vocabulary,
-            attachment_path="data/audio/daily_briefing.mp3"
-        )
-
-        print("Email sent!")
-
-    else:
-        print(
-            "Email skipped - no Gmail configuration."
-        )
 
 
 if __name__ == "__main__":
     main()
+

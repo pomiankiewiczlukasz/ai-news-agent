@@ -1,0 +1,26 @@
+2026-07-25 23:23:01,929 - INFO - AI News Agent started
+2026-07-25 23:23:02,226 - INFO - Articles fetched: 5
+2026-07-25 23:23:02,227 - INFO - Selected article: Sudan: Wenn die Drohne ins Klassenzimmer einschlägt
+2026-07-25 23:24:03,610 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-07-25 23:24:03,620 - INFO - German summary generated
+2026-07-25 23:25:07,627 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-07-25 23:26:16,456 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-07-25 23:26:16,457 - INFO - Polish translation generated
+2026-07-25 23:27:58,375 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-07-25 23:29:39,733 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-07-25 23:29:39,734 - INFO - Vocabulary generated
+2026-07-25 23:30:09,641 - INFO - Audio generated
+2026-07-25 23:30:09,643 - INFO - Briefing saved
+2026-07-25 23:34:32,124 - INFO - AI News Agent started
+2026-07-25 23:34:32,335 - INFO - Articles fetched: 5
+2026-07-25 23:34:32,335 - INFO - Selected article: Sudan: Wenn die Drohne ins Klassenzimmer einschlägt
+2026-07-25 23:35:17,689 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-07-25 23:35:17,693 - INFO - German summary generated
+2026-07-25 23:35:55,296 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-07-25 23:36:17,669 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-07-25 23:36:17,670 - INFO - Polish translation generated
+2026-07-25 23:37:39,486 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-07-25 23:39:11,367 - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-07-25 23:39:11,369 - INFO - Vocabulary generated
+2026-07-25 23:39:31,594 - INFO - Audio generated
+2026-07-25 23:39:31,595 - INFO - Briefing saved
