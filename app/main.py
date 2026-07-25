@@ -1,15 +1,17 @@
 import asyncio
+import os
 
 from agents.news_ranker import rank_news
 from agents.summary_agent import summarize_article
 from agents.translation_agent import translate_summary
 from agents.vocabulary_agent import extract_vocabulary
 from agents.vocabulary_reviewer import review_vocabulary
+from agents.polish_cleaner import clean_polish_text
 
 from services.rss_reader import get_news
 from services.briefing_writer import save_briefing
 from services.tts_service import generate_briefing_audio
-from agents.polish_cleaner import clean_polish_text
+from services.email_service import send_email
 
 
 def main():
@@ -38,11 +40,10 @@ def main():
     summary_pl_raw = translate_summary(summary_de)
 
     summary_pl = clean_polish_text(
-    summary_pl_raw
+        summary_pl_raw
     )
 
     print("Polish Translation:")
-    print("TEXT FOR POLISH AUDIO:")
     print(summary_pl)
     print()
 
@@ -80,43 +81,32 @@ def main():
     )
 
     print("Briefing saved!")
-
-    # 9. Send email (optional)
-
-if os.getenv("GMAIL_USER") and os.getenv("GMAIL_PASSWORD"):
-
-    send_email(
-        subject=f"AI News Agent: {best_article['title']}",
-        body=f"""
-German News Briefing
-
-Article:
-{best_article['title']}
-
-Link:
-{best_article['link']}
-
-German Summary:
-
-{summary_de}
+    print()
 
 
-Polish Translation:
+    # 9. Send email if configured
+    if (
+        os.getenv("GMAIL_USER")
+        and os.getenv("GMAIL_PASSWORD")
+    ):
 
-{summary_pl}
+        send_email(
+            subject=f"🇩🇪 AI News: {best_article['title']}",
+            article_title=best_article["title"],
+            article_link=best_article["link"],
+            summary_de=summary_de,
+            summary_pl=summary_pl,
+            vocabulary=vocabulary,
+            attachment_path="data/audio/daily_briefing.mp3"
+        )
 
+        print("Email sent!")
 
-Vocabulary:
+    else:
+        print(
+            "Email skipped - no Gmail configuration."
+        )
 
-{vocabulary}
-""",
-        attachment_path="data/audio/daily_briefing.mp3"
-    )
-
-    print("Email sent!")
-
-else:
-    print("Email skipped - no Gmail configuration.")
 
 if __name__ == "__main__":
     main()
